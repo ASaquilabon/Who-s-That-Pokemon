@@ -1,11 +1,4 @@
-(async () => {
-  const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151");
-  const json = await res.json();
-
-  console.log(json.results);
-})();
-
-getPokeData = async function () {
+window.getPokeData = async function () {
   const pokemon = await getPokemon(); // fetch array of 151 Pokemon objects
   const randomPokemon = shuffle(pokemon); // shuffle array
   const pokemonChoices = get4Pokemon(randomPokemon);
@@ -21,6 +14,12 @@ getPokeData = async function () {
   };
 };
 
+async function getPokemon() {
+  const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151");
+  const pokemon = await res.json();
+
+  return pokemon.results;
+}
 function shuffle(unshuffled) {
   const shuffled = unshuffled
     .map((value) => ({ value, sort: Math.random() }))
